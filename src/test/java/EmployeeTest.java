@@ -63,4 +63,24 @@ public class EmployeeTest {
         boolean actual = employeeUtils.hasMoreThanThreeYearsOfServiceAndLessThanTwoDirectReports(employee);
         assertThat(actual).isTrue();
     }
+    @Test
+    void setEmployeeUtils6 () {
+        Employee employee = new Employee();
+        employee.setNumberOfDirectReport(1);
+
+
+        boolean actual = employeeUtils.hasMoreThanThreeDirectReports(employee);
+        assertThat(actual).isFalse();
+    }
+    //    hasMoreThanThreeYearsOfServiceAndLessThanTwoDirectReports
+    @Test
+    void setEmployeeUtils7 () {
+        Employee employee = new Employee();
+        employee.setNumberOfDirectReport(5);
+        employee.setYearsOfServices(5);
+
+
+        boolean actual = employeeUtils.hasMoreThanThreeYearsOfServiceAndLessThanTwoDirectReports(employee);
+        assertThat(actual).isFalse();
+    }
 }
