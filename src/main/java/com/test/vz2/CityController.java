@@ -10,6 +10,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
+import java.util.function.IntBinaryOperator;
 import java.util.stream.Collectors;
 
 @RestController
@@ -54,7 +55,12 @@ public class CityController  {
         };
 //        ;
         System.out.println(calculator.calculate(5,6));
-
+        IntBinaryOperator calc2 = (x,y) -> {
+            Random random = new Random();
+            int randomNumber = random.nextInt(50);
+            return x * y + randomNumber;
+        };
+        System.out.println("imprimit con Interface local: "+calc2.applyAsInt(5,6));
         return returnName;
     }
 
