@@ -1,5 +1,6 @@
 package com.test.vz2;
 
+import com.test.vz2.functionals.Calculator;
 import com.test.vz2.functionals.InterfaceOne;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -8,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 import java.util.stream.Collectors;
 
 @RestController
@@ -41,6 +43,18 @@ public class CityController  {
             }
         };
         imprimir2.printSomething();
+
+        InterfaceOne imprmir3 = () -> System.out.println("imprimir con lambda");
+        imprmir3.printSomething();
+
+        Calculator calculator = (int x, int y) -> {
+            Random random = new Random();
+            int randomNumber = random.nextInt(50);
+            return x * y + randomNumber;
+        };
+//        ;
+        System.out.println(calculator.calculate(5,6));
+
         return returnName;
     }
 
