@@ -1,5 +1,6 @@
 package com.test.vz2;
 
+import com.test.vz2.functionals.InterfaceOne;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -10,7 +11,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 @RestController
-public class CityController {
+public class CityController  {
 
 
 //    @PostMapping("/employees")
@@ -30,6 +31,16 @@ public class CityController {
                 returnName = entry.getKey();
             }
         }
+        SetInterface imprimir1 = new SetInterface();
+        imprimir1.printSomething();
+
+        InterfaceOne imprimir2 = new InterfaceOne() {
+            @Override
+            public void printSomething() {
+                System.out.println("imprimir 2");
+            }
+        };
+        imprimir2.printSomething();
         return returnName;
     }
 
