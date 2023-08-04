@@ -6,12 +6,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Comparator;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
+import java.util.*;
 import java.util.function.IntBinaryOperator;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @RestController
 public class CityController  {
@@ -72,6 +70,37 @@ public class CityController  {
                 .collect(Collectors.toList());
 
         return ciudadesOrdenadas;
+    }
+    @PostMapping(value = "/examples/stream"/*, consumes = "application/json"*/)
+    public String  StreamSimpleExample (@RequestBody int index) {
+        String stringFinal = "";
+
+        Integer [] scores = new Integer[]{80,50,47,40,60};
+
+        List <String> shoppingList = new ArrayList<>();
+        shoppingList.add("coffe");
+        shoppingList.add("bread");
+        shoppingList.add("milk");
+        shoppingList.add("pasta");
+        shoppingList.add("tacos");
+        shoppingList.add("tacos");
+
+
+        Stream<Integer> streamScore = Arrays.stream(scores);
+//        Stream<String> streamShop =  shoppingList.stream();
+
+        List <String> shoppingSorted = shoppingList.stream()
+                .sorted()
+                .map(item -> item.toUpperCase())
+//                filter(item ->  item.startsWith("P")).
+                .collect(Collectors.toList());
+        Stream<String>  streamLetter = Stream.of("a","b", "c");
+
+        System.out.println(shoppingSorted);
+
+
+        stringFinal = shoppingList.get(index);
+        return stringFinal;
     }
 
 }
