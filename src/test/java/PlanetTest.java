@@ -1,5 +1,3 @@
-package com.test.vz2;
-
 import com.test.vz2.planets.Planet;
 import com.test.vz2.planets.PlanetsUtils;
 import com.test.vz2.planets.SolarSystem;
