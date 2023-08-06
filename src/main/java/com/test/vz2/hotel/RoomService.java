@@ -6,13 +6,40 @@ import java.util.*;
 public class RoomService {
 
     // 1. Declare a Collection to store Room Inventory
-    List<Room> colletions=new ArrayList<>();
+    private Collection <Room> colletions;
 
     public RoomService() {
 
         // 2. Initialize Collection and assign it to the Room Inventory
 //        Collection to store Room Inventory
 //        Collection <Room> colletions = new ArrayList<>();
+        this.colletions = new LinkedHashSet<>();
+
+    }
+    public boolean hasRoom(Room room) {
+
+        // 1. Returns a boolean that indicates if the Room Inventory contains a Room.
+
+        return colletions.contains(room);
+    }
+
+    public Room[] asArray() {
+
+        // 2. Returns all Rooms as an Array of Rooms in the **order** they were Added.
+//        colletions.toArray();
+
+        return this.colletions.toArray(new Room[0]);
+    }
+
+    public Collection<Room> getByType(String type){
+
+	/*
+	   3. Return a new Collection of Rooms where Room#type matches the provided String.
+		  The original Room Inventory collection MUST NOT BE MODIFIED.
+	*/
+        Collection<Room> copy = new HashSet<>(this.colletions);
+        copy.removeIf(r -> !r.getType().equals(type));
+        return copy;
 
     }
 
@@ -20,14 +47,13 @@ public class RoomService {
 
         // 3. Return the Room Inventory
 
-        return colletions;
+        return new HashSet<>(colletions);
     }
 
     public void createRoom(String name, String type, int capacity, double rate) {
 
         // 4. Add a new Room to the Room Inventory using the provided parameters
-        Room roomTemp = new Room(name,type,capacity,rate);
-        colletions.add(roomTemp);
+        colletions.add(new Room(name,type,capacity,rate));
 
     }
 
@@ -42,20 +68,8 @@ public class RoomService {
 
     public void removeRoom(Room room) {
 
-        // 6. Remove the provided Room from the Room Inventory
-        System.out.println("1 size del Collections: "+colletions.size());
-        int removeRoom = 0;
-        if(colletions.equals(room)){
-            System.out.println("si está");
-        }
-        ;
-        for (int i = 0; i < colletions.size(); i++) {
-            if (colletions.get(i).getName().equals(room.getName())){
-                colletions.remove(i);
-            }
-        }
 
-        System.out.println("2 size del Collections: "+colletions.size());
+        colletions.remove(room);
 
     }
 

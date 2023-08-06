@@ -32,7 +32,7 @@ public class PlanetsUtils {
 
     public List<Planet> getPlanetsWithDensityGreaterThanFive(List<Planet> planets) {
         List <Planet> returnList = planets.stream()
-                .filter(planet -> planet.getDensity() > 5)
+                .filter(planet -> planet.getDensity() > 5 )
                 .collect(Collectors.toList());
 //        planets.stream()
         return returnList;
