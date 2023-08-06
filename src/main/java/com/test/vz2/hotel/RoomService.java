@@ -2,6 +2,7 @@ package com.test.vz2.hotel;
 
 import java.lang.reflect.Array;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class RoomService {
 
@@ -41,8 +42,43 @@ public class RoomService {
         copy.removeIf(r -> !r.getType().equals(type));
         return copy;
 
+
     }
 
+    public void applyDiscount(final double discount) {
+
+        //Reduces the rate of each room by the provided discount
+        Iterator<Room> iterator = colletions.iterator();
+
+        Collection <Room> tempCollection = colletions
+                .stream()
+                .map(r ->{ r.setRate(r.getRate() * (1 - discount)); return r;})
+                .collect(Collectors.toList());
+        colletions.clear();
+        colletions.addAll(tempCollection);
+
+    }
+
+    public Collection<Room> getRoomsByCapacity(final int requiredCapacity) {
+
+        //Returns a new collection of rooms that meet or exceed the provided capacity
+        Collection <Room> tempCollection = colletions
+                .stream()
+                .filter(r -> r.getCapacity() >= 4)
+                .collect(Collectors.toList());
+        return tempCollection;
+
+    }
+
+    public Collection<Room> getRoomByRateAndType(final double rate, final String type){
+
+        Collection <Room> tempCollection = colletions
+                .stream()
+                .filter(r -> ((r.getRate() < rate) && (r.getType().equals(type))))
+                .collect(Collectors.toList());
+//        tempCollection.stream().forEach(r -> System.out.println(r.getName()));
+        return tempCollection;
+    }
     public Collection<Room> getInventory(){
 
         // 3. Return the Room Inventory
