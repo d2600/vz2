@@ -1,3 +1,5 @@
+package Hotel;
+
 import com.test.vz2.employee.Employee;
 import com.test.vz2.hotel.HotelMain;
 import org.junit.jupiter.api.Test;

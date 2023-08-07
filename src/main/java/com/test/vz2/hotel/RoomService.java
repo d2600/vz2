@@ -48,36 +48,36 @@ public class RoomService {
     public void applyDiscount(final double discount) {
 
         //Reduces the rate of each room by the provided discount
-        Iterator<Room> iterator = colletions.iterator();
 
-        Collection <Room> tempCollection = colletions
-                .stream()
-                .map(r ->{ r.setRate(r.getRate() * (1 - discount)); return r;})
-                .collect(Collectors.toList());
-        colletions.clear();
-        colletions.addAll(tempCollection);
+//        Collection <Room> tempCollection = colletions
+//                .stream()
+//                .map(r ->{ r.setRate(r.getRate() * (1 - discount)); return r;})
+//                .collect(Collectors.toList());
+//        colletions.clear();
+//        colletions.addAll(tempCollection);
+
+        //solución de él
+        this.colletions.forEach(r -> r.setRate(r.getRate() * (1 - discount)) );
 
     }
 
     public Collection<Room> getRoomsByCapacity(final int requiredCapacity) {
 
         //Returns a new collection of rooms that meet or exceed the provided capacity
-        Collection <Room> tempCollection = colletions
+        //me gustó mas mi solución, él hizo algo parecido a lo que yo hice en el applyDiscount
+        return new HashSet<>(colletions
                 .stream()
-                .filter(r -> r.getCapacity() >= 4)
-                .collect(Collectors.toList());
-        return tempCollection;
+                .filter(r -> r.getCapacity() >= requiredCapacity)
+                .collect(Collectors.toList()));
 
     }
 
     public Collection<Room> getRoomByRateAndType(final double rate, final String type){
 
-        Collection <Room> tempCollection = colletions
+        return new LinkedHashSet<>(colletions
                 .stream()
                 .filter(r -> ((r.getRate() < rate) && (r.getType().equals(type))))
-                .collect(Collectors.toList());
-//        tempCollection.stream().forEach(r -> System.out.println(r.getName()));
-        return tempCollection;
+                .collect(Collectors.toList()));
     }
     public Collection<Room> getInventory(){
 
